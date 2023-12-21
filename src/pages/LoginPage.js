@@ -8,12 +8,7 @@ import { LoginContext } from "../App";
 
 let cars = [Car1, Car2, Car3];
 
-if (localStorage.getItem("num") === null) {
-  localStorage.setItem("num", JSON.stringify(1));
-}
-
 function LoginPage() {
-  let num = JSON.parse(localStorage.getItem("num"));
   let { setKind, setColor, setNumberpalet, setNumber, setSubmet } =
     useContext(LoginContext);
 
@@ -27,22 +22,30 @@ function LoginPage() {
   const [kindValue, setKindValue] = useState("");
   const [colorValue, setColorValue] = useState("");
   const [numberpaletValue, setNumberpaletValue] = useState("");
+  const [numberValue, setNumberValue] = useState("");
   const [error, setError] = useState(false);
 
   function submit(e) {
+    const allCars = JSON.parse(localStorage.getItem("cars"));
     e.preventDefault();
+
+    for (let i = 0; i < allCars.length; i++) {
+      if (JSON.parse(allCars[i].number) === JSON.parse(numberValue)) {
+        alert("به این نمبر موتر موجود است!");
+        return;
+      }
+    }
     if (
       kindValue.length === 0 ||
       colorValue.length === 0 ||
-      numberpaletValue.length === 0
+      numberpaletValue.length === 0 ||
+      numberValue.length === 0
     ) {
       setError(true);
     } else {
       setError(false);
       navigate("/");
       setSubmet(true);
-      setNumber(num);
-      localStorage.setItem("num", JSON.stringify(num + 1));
     }
   }
 
@@ -123,7 +126,14 @@ function LoginPage() {
             <div>
               <label htmlFor="number">نمبر</label>
               <div>
-                <input id="number" name="number" value={num} readOnly />
+                <input
+                  id="number"
+                  name="number"
+                  onChange={(event) => {
+                    setNumber(event.target.value);
+                    setNumberValue(event.target.value);
+                  }}
+                />
               </div>
             </div>
             <div>

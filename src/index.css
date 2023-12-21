@@ -564,3 +564,14 @@ tbody tr:hover {
   font-size: 24px;
   text-decoration: none;
 }
+
+.table_exit_button {
+  width: 70px;
+  height: 25px;
+  background: inherit;
+  border: none;
+  cursor: pointer;
+  color: #d91515;
+  font-size: 18px;
+  font-weight: bold;
+}

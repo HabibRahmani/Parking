@@ -4,7 +4,6 @@ import { LoginContext } from "./App";
 if (localStorage.getItem("cars") === null) {
   localStorage.setItem("cars", JSON.stringify([]));
 }
-let addedCars = JSON.parse(localStorage.getItem("cars"));
 
 export default function Parking() {
   const { submet, setSubmet } = useContext(LoginContext);
@@ -56,6 +55,7 @@ function SubStreet() {
 }
 
 function ArrivedCars() {
+  let addedCars = JSON.parse(localStorage.getItem("cars"));
   const { kind, color, numberpalet, number } = useContext(LoginContext);
   let newCars = {
     kind: kind,
