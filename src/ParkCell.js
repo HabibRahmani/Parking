@@ -1,6 +1,9 @@
+import axios from "axios";
 import Car1 from "./images/car1.png";
 import Car2 from "./images/car2.png";
 import Car3 from "./images/car3.png";
+import { useContext, useEffect, useState } from "react";
+import { LoginContext } from "./App";
 const car = [Car1, Car2, Car3];
 
 export default function ParkCell({ kind, start }) {
@@ -16,20 +19,18 @@ export default function ParkCell({ kind, start }) {
 }
 
 function Cell({ id, kind }) {
-  const addCars = JSON.parse(localStorage.getItem("cars")).length;
-  console.log(addCars);
+  // const addCars = JSON.parse(localStorage.getItem("cars")).length;
+  const { parkedCars } = useContext(LoginContext);
+  
+
   return (
-    <div className={id <= addCars ? "fill" : "cell"}>
+    <div className={parkedCars.includes(id) ? "fill" : "cell"}>
       <div>
         {kind ? (
           <>
-            {id <= addCars ? (
+            {parkedCars.includes(id) ? (
               <>
-                <img
-                  className="car-image"
-                  src={car[Math.floor(Math.random() * 3)]}
-                  alt=""
-                />
+                <img className="car-image" src={car[Math.floor(Math.random() * 3)]} alt="" />
                 <h1>{id}</h1>
               </>
             ) : (
@@ -38,14 +39,10 @@ function Cell({ id, kind }) {
           </>
         ) : (
           <>
-            {id <= addCars ? (
+            {id <= parkedCars ? (
               <>
                 <h1>{id}</h1>
-                <img
-                  className="car-image"
-                  src={car[Math.floor(Math.random() * 3)]}
-                  alt=""
-                />
+                <img className="car-image" src={car[Math.floor(Math.random() * 3)]} alt="" />
               </>
             ) : (
               <h1>{id}</h1>

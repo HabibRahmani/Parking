@@ -9,7 +9,7 @@ import { LoginContext } from "../App";
 let cars = [Car1, Car2, Car3];
 
 function LoginPage() {
-  let { setKind, setColor, setNumberpalet, setNumber, setSubmet } =
+  let { setKind, setColor, setNumberpalet, setNumber, setSubmet,doorWay,updateDoorWay } =
     useContext(LoginContext);
 
   let [randomNum, setRandomNum] = useState("");
@@ -55,9 +55,12 @@ function LoginPage() {
       <div className="login-list-parent">
         <div className="back-div">
           <nav className="back">
-            <ul>
+            <ul style={{display: 'flex'}}>
               <li>
                 <NavLink to="/">برگشت</NavLink>
+              </li>
+              <li style={{textWrap: "nowrap"}}>
+               <a href="#" onClick={updateDoorWay}>{doorWay ? 'بستن راهبند': 'باز کردن راهبند'}</a>
               </li>
             </ul>
           </nav>
