@@ -12,9 +12,9 @@ function App() {
   let [numberpalet, setNumberpalet] = useState("");
   let [number, setNumber] = useState(1);
   let [submet, setSubmet] = useState(false);
-  let [parkedCars,setParkedCars] = useState([]);
-  let [doorWay,setDoorWay] = useState(false);
-  
+  let [parkedCars, setParkedCars] = useState([]);
+  let [doorWay, setDoorWay] = useState(false);
+
   const [intevalVariable, setIntervalVariable] = useState(null);
   useEffect(() => {
     // Axios GET request
@@ -24,8 +24,8 @@ function App() {
         .get("http://localhost:3001/test")
         .then((response) => {
           // Handle successful response
-          console.log(response.data)
-          setParkedCars(response.data)
+          console.log(response.data);
+          setParkedCars(response.data);
         })
         .catch((error) => {
           // Handle error
@@ -35,17 +35,17 @@ function App() {
     setIntervalVariable(temp);
   }, []);
 
-  function updateDoorWay(){
+  function updateDoorWay() {
     axios
-    .post("http://localhost:3001/setDoorWay?doorWay="+(!doorWay))
-    .then((response) => {
-      // Handle successful response
-      console.log(response.data)
-    })
-    .catch((error) => {
-      // Handle error
-      console.error("Error fetching data:", error);
-    });
+      .post("http://localhost:3001/setDoorWay?doorWay=" + !doorWay)
+      .then((response) => {
+        // Handle successful response
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error fetching data:", error);
+      });
     setDoorWay(!doorWay);
   }
 
@@ -64,7 +64,7 @@ function App() {
         setSubmet,
         parkedCars,
         doorWay,
-        updateDoorWay
+        updateDoorWay,
       }}
     >
       <BrowserRouter>
